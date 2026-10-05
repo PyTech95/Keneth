@@ -228,3 +228,9 @@ A modern e-commerce website for Keneth Global — an Indian company exporting to
 - Catalog now 114 products: masalas 16, home-furnishing 41 (incl 28 napkin-rings, 2 curtain-holdbacks, 3 candle-holders, 3 wall-hangings), christmas-decor 39 (18 ornaments, 8 stockings, 7 coasters, 4 tree-skirts), artificial-jewelry 18 (8 necklaces, 4 earrings, 3 leather-accessories, 2 bangles, 1 ring).
 - Personal/people photos and phone-screenshot grids were excluded as non-products.
 - Prices set as sensible EUR defaults in line with similar items (owner can edit in Admin). Verified: all 114 products return a 200 image; new product detail pages render real photos.
+
+## Full Catalog Audit & 100% Itemization (2026-10-05)
+- Completed 100% itemization: extracted every product image including cropped screenshot items.
+- Added 5 more distinct items: Etched Silver Beaded Napkin Ring, Kundan & Ruby Drop Choker Set, CZ Solitaire Bridal Necklace Set, Multicolour Gemstone Long Chand Earrings, Crescent Kundan & Pearl Hoop Earrings.
+- Total catalog is now 119 products across 4 houses (Masalas: 16, Home Furnishing: 42, Christmas Theme: 39, Artificial Jewelry: 22).
+- Verified: all 119 products have 100% working 200 HTTP images and active listings.

@@ -44,11 +44,23 @@ def save_png(src_path: Path, out_path: Path):
     im.save(out_path, "PNG", optimize=True)
 
 
+CUSTOM_FILES = {
+    "etched-silver-beaded-napkin-ring": SRC_ROOT / "napkin_rings" / "etched_silver_beaded_ring.png",
+    "kundan-ruby-drop-necklace-set": SRC_ROOT / "jewellery" / "kundan_red_drop_necklace.png",
+    "cz-solitaire-bridal-necklace-set": SRC_ROOT / "jewellery" / "cz_solitaire_necklace_set.png",
+    "multicolour-chand-earrings": SRC_ROOT / "jewellery" / "long_chand_earrings.png",
+    "crescent-kundan-pearl-earrings": SRC_ROOT / "jewellery" / "crescent_pearl_earrings.png",
+}
+
 def main():
     made = 0
     for p in UPLOADED:
         slug = p["slug"]
         h = hashlib.md5(slug.encode()).hexdigest()[:8]
+        if slug in CUSTOM_FILES and CUSTOM_FILES[slug].exists():
+            save_png(CUSTOM_FILES[slug], OUT / f"{slug}-{h}.png")
+            made += 1
+            continue
         sources = p["_sources"]
         if not sources:
             print("WARN no sources:", slug)
