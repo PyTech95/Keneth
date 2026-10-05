@@ -8,6 +8,7 @@ import { ThreeHouses } from "@/components/ThreeHouses";
 import { FeaturedJewelry } from "@/components/FeaturedJewelry";
 import { ProductCarousel } from "@/components/ProductCarousel";
 import CertificateSection from "@/components/CertificateSection";
+import { GalleryTeaser } from "@/components/GalleryTeaser";
 import { HOUSES } from "@/lib/catalog";
 import { Quote, Star } from "lucide-react";
 
@@ -72,6 +73,7 @@ export default function Home() {
                 </div>
             </div>
         </section>
+        <GalleryTeaser />
         <section className="py-20 sm:py-24 lg:py-32">
             <div className="max-w-3xl mx-auto px-5 sm:px-6 text-center">
                 <p className="text-xs uppercase text-brass-300 mb-4">— The Dispatch</p><h2 className="font-serif text-4xl sm:text-5xl text-bone-100 leading-none mb-4">{t("sec.newsletter.title")}</h2>

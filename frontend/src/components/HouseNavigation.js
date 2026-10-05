@@ -11,6 +11,7 @@ export const HouseNavigation = ({ mobile = false }) => {
     return <nav data-testid={mobile ? "mobile-house-navigation" : "desktop-house-navigation"} className={mobile ? "space-y-2" : "flex items-center justify-between gap-5"} aria-label={t("catalog.categories")}>
         {HOUSES.map(house => <HouseMenu key={house.key} house={house} categories={tree[house.key]?.categories || {}} error={error} mobile={mobile} />)}
         <Link to="/shop" data-testid={mobile ? "mobile-nav-shop" : "nav-shop"} className={mobile ? "block py-3 font-serif text-2xl" : "text-[11px] uppercase text-bone-100 hover:text-brass-300 transition-colors"}>{t("nav.shop")}</Link>
+        <Link to="/gallery" data-testid={mobile ? "mobile-nav-gallery" : "nav-gallery"} className={mobile ? "block py-3 font-serif text-2xl" : "text-[11px] uppercase text-bone-100 hover:text-brass-300 transition-colors"}>Gallery</Link>
     </nav>;
 };
 

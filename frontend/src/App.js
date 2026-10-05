@@ -26,6 +26,7 @@ import JournalPost from "@/pages/JournalPost";
 import Certifications from "@/pages/Certifications";
 import Wholesale from "@/pages/Wholesale";
 import Christmas from "@/pages/Christmas";
+import Gallery from "@/pages/Gallery";
 
 function Layout({ children }) {
     return (
@@ -73,6 +74,7 @@ export default function App() {
                                     <Route path="/certifications" element={<Certifications />} />
                                     <Route path="/wholesale" element={<Wholesale />} />
                                     <Route path="/christmas" element={<Christmas />} />
+                                    <Route path="/gallery" element={<Gallery />} />
                                     <Route path="/payment/success" element={<PaymentSuccess />} />
                                     <Route path="/payment/cancel" element={<PaymentCancel />} />
                                     <Route path="/login" element={<Login />} />

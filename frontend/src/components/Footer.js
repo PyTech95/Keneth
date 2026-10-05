@@ -93,6 +93,7 @@ export default function Footer() {
                     <div className="md:col-span-3">
                         <div className={col}>{t("footer.support")}</div>
                         <Link to="/wholesale" className={linkCls}>Wholesale enquiry</Link>
+                        <Link to="/gallery" data-testid="footer-gallery-link" className={linkCls}>Gallery</Link>
                         <Link to="/certifications" className={linkCls}>Certifications</Link>
                         <Link to="/journal" className={linkCls}>Journal</Link>
                         <Link to="/wishlist" className={linkCls}>Wishlist</Link>

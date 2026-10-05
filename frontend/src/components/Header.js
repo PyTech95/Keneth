@@ -87,7 +87,7 @@ export default function Header() {
             </div>
             <div className="px-5 py-6"><HouseNavigation mobile />
                 <div className="border-t border-white/10 mt-6 py-4 flex flex-wrap gap-5 text-sm text-bone-300">
-                    {["wholesale", "certifications", "journal"].map(path => <Link key={path} data-testid={`mobile-nav-${path}`} to={`/${path}`} className="capitalize hover:text-brass-300">{path}</Link>)}
+                    {["wholesale", "certifications", "journal", "gallery"].map(path => <Link key={path} data-testid={`mobile-nav-${path}`} to={`/${path}`} className="capitalize hover:text-brass-300">{path}</Link>)}
                 </div>
                 {user ? <div className="flex flex-wrap gap-5 py-4 text-sm text-brass-300"><Link data-testid="mobile-nav-account" to="/account">{t("nav.account")}</Link>
                     {user.role === "admin" && <Link data-testid="mobile-nav-admin" to="/admin">{t("nav.admin")}</Link>}

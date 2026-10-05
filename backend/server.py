@@ -52,6 +52,8 @@ STATIC_ROOT = ROOT_DIR / "static"
 STATIC_ROOT.mkdir(exist_ok=True)
 app.mount("/api/static", StaticFiles(directory=str(STATIC_ROOT)), name="static")
 
+GALLERY_DIR = STATIC_ROOT / "gallery"
+
 
 # ================== HELPERS ==================
 def doc_to_product(doc: dict) -> dict:
@@ -135,6 +137,22 @@ async def list_products(vertical: Optional[str] = None, category: Optional[str] 
     cursor = db.products.find(query).limit(limit)
     docs = await cursor.to_list(length=limit)
     return [doc_to_product(d) for d in docs]
+
+
+@api.get("/gallery")
+async def gallery():
+    """List brand gallery media (images + video) served from static/gallery."""
+    items = []
+    if GALLERY_DIR.exists():
+        for f in sorted(GALLERY_DIR.iterdir()):
+            if f.name.startswith("."):
+                continue
+            ext = f.suffix.lower()
+            if ext in (".jpg", ".jpeg", ".png", ".webp"):
+                items.append({"type": "image", "src": f"gallery/{f.name}"})
+            elif ext in (".mp4", ".webm", ".mov"):
+                items.append({"type": "video", "src": f"gallery/{f.name}"})
+    return items
 
 
 @api.get("/products/verticals")
