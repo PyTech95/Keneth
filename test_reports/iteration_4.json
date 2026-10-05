@@ -1,0 +1,31 @@
+{
+  "summary": "Full E2E verification of Keneth Global Inc after fresh import. Updated backend_test.py to match the new catalog state (31 products across masalas/home-furnishing/artificial-jewelry/christmas-decor, new categories dry-fruits + nuts, 10 new masala products). Ran pytest: 40 passed, 4 skipped (Stripe-config-gated). Verified desktop (1920) + mobile (390) UI: home, shop/masalas with category filters, product detail with real images for all 10 new products, cart, graceful 503 'Payments are unavailable' toast on checkout, admin login + /admin dashboard, FSSAI Certificate section (Summary + Certificate tabs with preview image + open/download links).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Checkout graceful degradation works as designed: POST /api/checkout/session returns 503 with a clear 'Payments are unavailable…' message and the frontend surfaces it as a toast while keeping the cart intact.",
+    "Static product images are served under /api/static/products/… with correct image/* content-type for all 10 new products (cumin-seeds, star-anise-whole, cloves-whole, black-cardamom, cinnamon-bark, black-peppercorns, medjool-dates, ajwa-dates, cashew-nuts, pistachios).",
+    "Category tree in /api/products/verticals and category filtering by slug exactly match the new structure: masalas={blended:3, single:2, whole:7, dry-fruits:2, nuts:2} = 16; christmas-decor=4; totals verified in UI (filter buttons category-dry-fruits, category-nuts, category-whole-spices etc).",
+    "Admin role gating holds: customer tokens receive 403 on /api/admin/*; invalid JWT returns 401; password_hash never leaked in /api/admin/users responses."
+  ],
+  "updated_files": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/iteration_4.json"
+  ],
+  "success_rate": {"backend": "100% (40 passed, 4 config-skipped)", "frontend": "100% of requested flows"},
+  "test_credentials": "admin@kenethglobal.com / Admin@Keneth2026 (see /app/memory/test_credentials.md). Customers created ad-hoc with TEST_ prefix.",
+  "seed_data_creation": "No new persistent seed data. Tests create TEST_ customers and a TEST wholesale enquiry; no destructive admin changes (price-patch tests revert).",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Public URL https://keneth-prod-check.preview.emergentagent.com used throughout. Stripe is intentionally unconfigured (sk_test_emergent placeholder); checkout returns HTTP 503 and the UI shows a friendly 'Payments are unavailable' toast — treat as expected until real Stripe test keys are provided. Catalog has 31 products; masalas vertical has 16 across 5 categories including the new dry-fruits + nuts. Certificate section data-testids: home-certificate-section / certificate-tab-summary / certificate-tab-certificate / certificate-preview-image / certificate-open-full / certificate-download-full — all verified.",
+  "rca of the issue": "No bug found. Previous backend_test.py expectations were pinned to the pre-expansion catalog (17 products, 3 verticals) and would have failed against the new 31-product catalog — updated to new counts (31 total; masalas 16 with dry-fruits=2, nuts=2, whole-spices=7). Added test_new_products_exist_with_images that fetches each of the 10 new slugs and verifies /api/static image bytes are served."
+}

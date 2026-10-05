@@ -1,0 +1,39 @@
+{
+  "summary": "Verified the 13 newly added products end-to-end on the live preview URL. Backend pytest (test_new_products_iter6.py): 18/19 passed — total count = 44, all 13 slugs present, every new product returns 200 on /api/products/{slug} with correct vertical+category, price_eur>0, main ai_image loads from /api/static/products/... as image/*, vertical filters for christmas-decor / home-furnishing / artificial-jewelry include the new items and expose the new categories (tree-skirts, placemats, napkin-rings, candle-holders, earrings, necklaces, leather-accessories), and the original spice/dry-fruit/nut catalog is intact. 1 failure: jute-ball-ornaments has only the main image on disk and no gallery_images (array empty). Frontend (Playwright 1920 + 390): /shop/christmas-decor, /shop/home-furnishing, /shop/artificial-jewelry all render every new product card with real images (0 broken images, 0 console errors). Category filter chips 'Tree Skirts', 'Placemats', 'Napkin Rings', 'Candle Holders', 'Earrings', 'Necklaces', 'Leather Accessories' are visible on the correct verticals. Product detail /product/embroidered-velvet-tree-skirt shows 16 gallery thumbnail buttons, price, Add to Cart + Buy Now (via role selector, text is uppercased by CSS). Add-to-Cart flow: clicked ATC → /cart shows 'Embroidered Velvet Tree Skirt' qty 1 ₹6,120, Subtotal ₹6,120, Shipping ₹1,080, Total ₹7,200. Mobile 390px product page for oxidised-silver-jhumka renders fine with gallery + no broken images. Checkout intentionally not exercised (503 by design).",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/api/products/jute-ball-ornaments", "issue": "gallery_images is an empty array — only the main image (jute-ball-ornaments-44dd55ee.png) is present on disk under /app/backend/static/products. All 12 other new products have 1-7 gallery files. Product detail page will show main image only (still functional)."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "ProductDetail breadcrumb (mobile)", "issue": "Breadcrumb for /product/oxidised-silver-jhumka shows 'HOME > HOME FURNISHING' instead of 'HOME > ARTIFICIAL JEWELRY'. Backend returns vertical='artificial-jewelry' correctly, so this is a frontend mapping bug in the breadcrumb/parent-vertical lookup for the new artificial-jewelry products. Low priority (does not block purchase).", "selector": "breadcrumb nav", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_new_products_iter6.py",
+    "/app/test_reports/pytest/iter6_new_products.xml"
+  ],
+  "action_items": [
+    "Upload (or auto-generate) at least 1 gallery image for jute-ball-ornaments so the product detail gallery is consistent with the other 12 new items.",
+    "Fix ProductDetail breadcrumb vertical label for artificial-jewelry products (currently rendering 'Home Furnishing' for oxidised-silver-jhumka on mobile)."
+  ],
+  "critical_code_review_comments": [
+    "static_catalog.reconcile_static_images only sets ai_image/gallery_images when the fields are falsy — safe idempotent behavior across reseeds.",
+    "seed_catalog.py has grown to 955 lines with 44 products; consider splitting into per-vertical modules (masalas.py, christmas_decor.py, home_furnishing.py, artificial_jewelry.py, dry_fruits.py) and importing a CATALOG list for maintainability.",
+    "No validation that every seeded product has at least one gallery image after reconcile; a startup assertion (or warn log) would have caught the jute-ball-ornaments gap."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_new_products_iter6.py",
+    "/app/test_reports/iteration_6.json"
+  ],
+  "success_rate": {"backend": "94.7% (18/19 — single failure is a data/gallery gap, not an API bug)", "frontend": "100% of requested storefront flows (shop grid, filters, product detail, Add to Cart, mobile)"},
+  "test_credentials": "No auth needed for storefront. Admin: admin@kenethglobal.com / Admin@Keneth2026 (unused this iteration).",
+  "seed_data_creation": "None. No products created/deleted — read-only verification only.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Backend regression suite /app/backend/tests/test_new_products_iter6.py is parameterised over the 13 new slugs — rerun after any catalog edit. The two action items (missing jute-ball-ornaments gallery, jhumka breadcrumb vertical) are small, independent fixes that main agent can self-verify."
+}

@@ -1,0 +1,50 @@
+{
+  "summary": "Completed backend + frontend regression for header/nav, hero, house scopes, Christmas pages, and about-video admin/API flows against public URL.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {
+        "flow": "Admin Homepage video (MP4) -> Home About playback",
+        "issue": "Saving MP4 succeeds and URL persists, but frontend falls back to 'This film is currently unavailable.' (video fetch aborted in browser logs for mdn sample MP4). YouTube embed path works.",
+        "affected_selectors": [
+          "[data-testid='admin-video-save']",
+          "[data-testid='about-video-container']",
+          "[data-testid='about-video-player']",
+          "[data-testid='about-video-error']"
+        ]
+      }
+    ],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/backend/tests/test_video_and_catalog_scopes.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Investigate direct MP4 playback unavailability on homepage/admin preview (likely external media host/embed restriction or network policy); keep YouTube/Vimeo as fallback.",
+    "Main agent should retest About video playback with a production-hosted MP4 URL known to allow cross-origin streaming."
+  ],
+  "critical_code_review_comments": [
+    "HouseNavigation desktop/mobile category menus, keyboard toggle (Enter/Escape), and route-close behavior are implemented and working with data-testid coverage.",
+    "Shop house filtering and strict category scoping are correctly enforced through query params; cross-house category combinations return empty without product leakage.",
+    "About-video backend canonicalization/validation is robust (auth boundaries, URL sanitization, no _id leak, persistence checks all passed)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_video_and_catalog_scopes.py",
+    "/app/test_reports/iteration_2.json"
+  ],
+  "success_rate": {
+    "backend": "100% (62/62 pytest)",
+    "frontend": "95% (all requested flows passed except direct MP4 playback availability)"
+  },
+  "seed_data_creation": "Created/used TEST_video_customer_scope@example.com via API tests; no production data mutated. About-video setting restored to original empty state.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Public URL used from frontend/.env. Verified: logo sizing (83 desktop / 73 mobile), Home nav removal desktop+mobile, four hover menus + submenu links, hero 4-product carousel + buy-now/cart + discover routing, featured jewelry-only with 5 cards and editorial images, home rows 6/5/6/4, /shop global 21 with ?house tabs, house pages category counts 3/6/4/4 with URL persistence, cross-house category empties, Christmas collection/gift-guide no cross-vertical leakage, responsive overflow clean at 320/768/1024/1440, multilingual nav/announcement strings update. Admin video: save/remove/YouTube embed works; direct MP4 playback unavailable in-browser in this env.",
+  "rca of the issue": "RCA for MP4 playback gap: PUT /api/site/about-video stores canonical MP4 URL and GET returns it correctly; frontend receives URL and renders AboutVideo container, but browser network shows mp4 request aborted and component switches to fallback error state. This indicates integration/runtime media availability issue (external host/network/embed policy) rather than API validation/persistence bug. Repro: login admin -> Admin > Homepage tab -> save https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4 -> open home About section -> fallback text appears. Mitigation: use a company-controlled public MP4 endpoint with permissive streaming/CORS, or prefer YouTube/Vimeo embeds for guaranteed preview behavior."
+}

@@ -1,0 +1,123 @@
+"""Editorial journal — seed posts for The Dispatch."""
+
+JOURNAL = [
+    {
+        "slug": "forty-five-days-of-fire",
+        "title": {
+            "en": "Forty-Five Days of Fire",
+            "de": "Fünfundvierzig Tage des Feuers",
+            "fr": "Quarante-cinq Jours de Feu",
+            "es": "Cuarenta y Cinco Días de Fuego",
+            "it": "Quarantacinque Giorni di Fuoco",
+        },
+        "excerpt": {
+            "en": "Why our garam masala is only roasted for six weeks a year — and what happens in the other forty-six.",
+            "de": "Warum unser Garam Masala nur sechs Wochen im Jahr geröstet wird — und was in den anderen sechsundvierzig geschieht.",
+            "fr": "Pourquoi notre garam masala n'est torréfié que six semaines par an — et ce qui se passe les quarante-six autres.",
+            "es": "Por qué nuestro garam masala solo se tuesta seis semanas al año — y qué ocurre en las otras cuarenta y seis.",
+            "it": "Perché il nostro garam masala viene tostato solo sei settimane all'anno — e cosa succede nelle altre quarantasei.",
+        },
+        "category": "spices",
+        "read_time": 6,
+        "author": "Rohan Mehta",
+        "date": "2026-01-18",
+        "cover_prompt": "Editorial luxury food photography of a small copper kadhai over an open wood fire, whole Indian spices roasting with visible smoke rising, cardamom pods, black peppercorns, cinnamon sticks, cloves, dramatic warm firelight illuminating the scene against a deep black background, hands stirring with a wooden spoon, cinematic magazine cover quality",
+        "cover_hint": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=1800&q=85",
+        "body": {
+            "en": [
+                "There is a specific window each year — between the last mustard harvest of Punjab and the first monsoon rains of Kerala — when the air is dry enough, and the spices old enough, to make a garam masala worth remembering. It lasts forty-five days.",
+                "Our master roaster, Balbir Singh, does not use a thermometer. He listens. Cardamom pods make a small popping sound; cumin turns a shade darker than an autumn leaf. When both happen within four minutes of each other, the batch is right. When they do not, he starts again.",
+                "The remaining three hundred and twenty days of the year are spent tasting last year's batches, visiting spice farms in Kerala and Tamil Nadu, and — twice a week — writing letters to us about which cinnamon suppliers are still cutting corners. The letters are handwritten. Balbir believes typewriters lie.",
+                "This kind of slowness is not a marketing decision. It is what the ingredients require. A garam masala that has been roasted quickly is not a lesser version of a good garam masala — it is a different, and considerably duller, product entirely.",
+            ],
+            "de": [
+                "Es gibt ein bestimmtes Fenster jedes Jahr, in dem die Luft trocken genug und die Gewürze reif genug für ein erinnernswertes Garam Masala sind. Es dauert fünfundvierzig Tage.",
+                "Unser Röstmeister Balbir Singh benutzt kein Thermometer — er hört zu. Wenn Kardamom und Kreuzkümmel innerhalb von vier Minuten den richtigen Klang machen, ist die Charge fertig.",
+                "Diese Art von Langsamkeit ist keine Marketingentscheidung. Sie ist das, was die Zutaten verlangen.",
+            ],
+            "fr": [
+                "Il existe une fenêtre précise chaque année où l'air est assez sec et les épices assez mûres pour un garam masala digne de mémoire. Elle dure quarante-cinq jours.",
+                "Notre maître torréfacteur Balbir Singh n'utilise pas de thermomètre. Il écoute.",
+                "Cette lenteur n'est pas une décision marketing. C'est ce que les ingrédients exigent.",
+            ],
+            "es": [
+                "Existe una ventana específica cada año en la que el aire está lo suficientemente seco y las especias lo suficientemente maduras para un garam masala digno de recordar. Dura cuarenta y cinco días.",
+                "Nuestro maestro tostador Balbir Singh no usa termómetro. Escucha.",
+                "Esta lentitud no es una decisión de marketing. Es lo que exigen los ingredientes.",
+            ],
+            "it": [
+                "C'è una finestra precisa ogni anno in cui l'aria è abbastanza secca e le spezie abbastanza mature per un garam masala degno di essere ricordato. Dura quarantacinque giorni.",
+                "Il nostro mastro tostatore Balbir Singh non usa un termometro. Ascolta.",
+                "Questa lentezza non è una decisione di marketing. È ciò che gli ingredienti richiedono.",
+            ],
+        },
+    },
+    {
+        "slug": "the-block-and-the-hand",
+        "title": {
+            "en": "The Block and the Hand",
+            "de": "Der Block und die Hand",
+            "fr": "Le Bloc et la Main",
+            "es": "El Bloque y la Mano",
+            "it": "Il Blocco e la Mano",
+        },
+        "excerpt": {
+            "en": "A morning in Sanganer, where six hundred year-old teak stamps still print our best bedsheets.",
+            "de": "Ein Morgen in Sanganer, wo sechshundert Jahre alte Teakstempel unsere besten Bettlaken drucken.",
+            "fr": "Un matin à Sanganer, où des tampons en teck vieux de six cents ans impriment encore nos plus beaux draps.",
+            "es": "Una mañana en Sanganer, donde sellos de teca de seiscientos años estampan aún nuestras mejores sábanas.",
+            "it": "Un mattino a Sanganer, dove timbri di tek vecchi di seicento anni stampano ancora le nostre migliori lenzuola.",
+        },
+        "category": "textiles",
+        "read_time": 8,
+        "author": "Angelica D'Souza",
+        "date": "2026-01-04",
+        "cover_prompt": "Editorial luxury photography of an Indian block-print artisan's workshop, hands pressing a carved wooden teak stamp block onto cream cotton fabric, deep indigo blue dye visible, wooden work table, natural morning window light, dramatic shadows, ultra sharp macro detail on the intricate pattern being printed, magazine cover quality photojournalism, cinematic",
+        "cover_hint": "https://images.pexels.com/photos/6803946/pexels-photo-6803946.jpeg?w=1800&q=85",
+        "body": {
+            "en": [
+                "It is 6:14 a.m. in Sanganer, Rajasthan. Kailash Chippa is soaking a carved teak block in a shallow tray of indigo dye. The block is older than his grandfather. It has printed exactly the same paisley for four generations of the same family — first for a maharaja's palace linens, then a small boutique in Paris, and now, quietly, for a bedsheet you may sleep on.",
+                "Block printing is not stamping. Kailash lifts the block, adjusts it by an angle no wider than a matchstick's edge, and lowers it — softly enough that the cotton fibers keep their memory of the last impression. A single bedsheet takes 384 individual placements. He counts them out loud, in Marwari, because to lose count is to ruin the sheet.",
+                "The workshop has ten tables, and each printer has 'their' fabric. They are protective of it. When a Delhi tourist recently asked to try, Kailash smiled and offered chai instead.",
+            ],
+            "de": [],
+            "fr": [],
+            "es": [],
+            "it": [],
+        },
+    },
+    {
+        "slug": "the-sixty-hour-bangle",
+        "title": {
+            "en": "The Sixty-Hour Bangle",
+            "de": "Der Sechzig-Stunden-Armreif",
+            "fr": "Le Bracelet de Soixante Heures",
+            "es": "El Brazalete de Sesenta Horas",
+            "it": "Il Bracciale di Sessanta Ore",
+        },
+        "excerpt": {
+            "en": "Inside a Jaipur meenakari atelier, where a single bangle takes two-and-a-half days of enamel and fire.",
+            "de": "In einem Meenakari-Atelier in Jaipur, wo ein einziger Armreif zweieinhalb Tage Emaille und Feuer benötigt.",
+            "fr": "Dans un atelier meenakari de Jaipur, où un seul bracelet nécessite deux jours et demi d'émail et de feu.",
+            "es": "Dentro de un taller meenakari de Jaipur, donde un solo brazalete requiere dos días y medio de esmalte y fuego.",
+            "it": "In un laboratorio meenakari di Jaipur, dove un solo bracciale richiede due giorni e mezzo di smalto e fuoco.",
+        },
+        "category": "jewelry",
+        "read_time": 5,
+        "author": "Rohan Mehta",
+        "date": "2025-12-14",
+        "cover_prompt": "Editorial luxury jewelry photography inside an Indian meenakari enamelling workshop in Jaipur, close-up macro shot of an artisan's hands painting brilliant peacock blue enamel onto a gold bangle with a fine brush, molten glass powder visible, kiln glowing warmly in soft-focus background, dramatic warm light, deep shadows, ultra sharp detail on the intricate enamel work, magazine cover quality documentary photography, cinematic",
+        "cover_hint": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=1800&q=85",
+        "body": {
+            "en": [
+                "Meenakari is a five-hundred-year-old craft, and it still hasn't been rushed. Powdered glass, coloured with mineral oxides, is painted onto a hammered brass base with a squirrel-hair brush thinner than a human eyelash. Then it is fired in a small kiln at 850 degrees Celsius.",
+                "One firing is never enough. Peacock blue is fired first, then emerald green, then ivory, then finally the gold. Between each firing the piece cools for hours. If it is moved too soon, the enamel cracks. If the temperature is off by twenty degrees, the colours turn muddy.",
+                "The result — sixty hours per bangle — is a piece of jewelry that, worn for a decade, will look better than it did the day you unwrapped it. Enamel is patient in a way people no longer are.",
+            ],
+            "de": [],
+            "fr": [],
+            "es": [],
+            "it": [],
+        },
+    },
+]

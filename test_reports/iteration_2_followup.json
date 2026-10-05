@@ -1,0 +1,25 @@
+{
+  "date": "2026-09-12",
+  "source_report": "/app/test_reports/iteration_2.json",
+  "case": "Direct video playback investigation and fallback verification",
+  "root_cause": "Automated Chromium cannot decode the sample MP4/H.264 format: canPlayType('video/mp4; codecs=\"avc1.42E01E\"') returns empty, MediaError.code=4. The exact same sample host serves HTTP206 with video/mp4 and byte-range support. WebM is supported and plays. This is a test-browser codec limitation, not Mongo persistence or host/CORS failure.",
+  "changes": [
+    "Localized format-specific playback error in AboutVideo instead of attributing every media failure to film availability.",
+    "Retry button remounts player; direct-open video link retained."
+  ],
+  "verified": [
+    "MP4 URL saves and persists; unsupported-codec message, retry and direct-open URL checked.",
+    "Admin Homepage form saves WebM URL (HTTP200); preview currentTime advances while playing.",
+    "Homepage native WebM currentTime advances while playing; reload retains saved URL.",
+    "Admin Remove returns204 and clears preview/homepage player.",
+    "All temporary video settings restored to original empty/null configuration."
+  ],
+  "test_execution_note": "One forced-pointer test clicked an obscured header element after scrolling, leaving /admin before the next save. Repeated with explicit page/response assertions and native Enter form submission; save, preview, home playback and removal all passed.",
+  "remaining_limitations": [
+    "H.264 MP4 playback itself cannot be verified in this Chromium build; requires a browser supporting that codec.",
+    "Owner must supply a public company video; YouTube/Vimeo embedding remains subject to provider/video permissions."
+  ],
+  "mocked_apis": [],
+  "application_blockers": [],
+  "credentials_file": "/app/memory/test_credentials.md"
+}

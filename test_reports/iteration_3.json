@@ -1,0 +1,49 @@
+{
+  "summary": "Completed backend+frontend migration regression on public URL. Added/ran direct Stripe config-gating tests and extensive MOCKED Stripe webhook/checkout unit tests. Verified removed generation routes return 404, PDFs serve valid bytes, shop/admin/cart flows work, and checkout correctly fails with 503 in current keyless setup while cart state persists.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {
+        "flow": "Frontend dev runtime startup logs",
+        "issue": "frontend.err.log still reports a VisualEditsPlugin lookup to /node_modules/@emergentbase/visual-edits/dist/visual-edit-overlay.js (ENOENT). App behavior is not blocked, but this indicates residual Emergent-specific runtime hook/noise in dev startup path.",
+        "affected_selectors": []
+      }
+    ],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/backend/tests/test_migration_stripe_regression.py",
+    "/app/backend/tests/test_payments_mocked.py",
+    "/app/backend/tests/test_video_and_catalog_scopes.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Investigate/remove the residual VisualEditsPlugin @emergentbase overlay lookup from frontend dev startup path (if truly app-owned; if platform-owned, document as non-app infrastructure artifact).",
+    "When real Stripe test credentials are available (valid sk_test_/rk_test_ + STRIPE_WEBHOOK_SECRET), retest hosted checkout completion/webhook on public preview."
+  ],
+  "critical_code_review_comments": [
+    "payments.py correctly enforces webhook_secret() before session creation, preventing unsigned-payment acceptance and false-positive checkout starts.",
+    "payment status is webhook-authoritative: checkout/status polling validates session but does not mark paid, which matches required security behavior.",
+    "Removed routes for image generation/regeneration are no longer reachable (404), and admin products uses View product links (no regenerate UI)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/backend_test.py",
+    "/app/backend/tests/test_migration_stripe_regression.py",
+    "/app/backend/tests/test_payments_mocked.py",
+    "/app/test_reports/iteration_3.json"
+  ],
+  "success_rate": {
+    "backend": "100% pass on executed suite (75 passed, 4 skipped by config gating)",
+    "frontend": "97% of requested flows verified (known Stripe setup blocker respected)"
+  },
+  "seed_data_creation": "No new persistent seed data created. Existing TEST_ users from previous suites were reused/created by tests as needed.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Public URL from frontend/.env was used. Checkout currently returns 503 by design because direct Stripe secrets are not configured; cart remains intact and error is shown. MOCKED Stripe tests are in /app/backend/tests/test_payments_mocked.py and use real Stripe signature construction with HMAC headers in tests only.",
+  "rca of the issue": "RCA (non-blocking): frontend.err.log contains a VisualEditsPlugin ENOENT looking for @emergentbase/visual-edits overlay. Repo search shows no @emergentbase dependency in manifests/config and node_modules/@emergentbase is absent; likely stale/indirect dev tooling hook rather than active app runtime dependency. Repro: check /var/log/supervisor/frontend.err.log after frontend start. Mitigation: trace CRACO/webpack plugin chain at runtime and remove/disable any residual visual-edit plugin registration, or document as managed-preview infrastructure artifact if external to app code."
+}

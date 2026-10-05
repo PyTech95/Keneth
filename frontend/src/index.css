@@ -1,0 +1,210 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: #14120E;
+    color: #F2F0EA;
+    font-family: "Outfit", sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.font-serif,
+h1, h2, h3, h4 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+}
+
+.font-sans {
+    font-family: "Outfit", sans-serif;
+}
+
+/* Selection */
+::selection {
+    background: #C5A059;
+    color: #0A0A09;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0A0A09;
+}
+::-webkit-scrollbar-thumb {
+    background: #2a2825;
+    border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #C5A059;
+}
+
+/* Grain overlay */
+.grain-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@layer base {
+    :root {
+        --background: 36 14% 7%;
+        --foreground: 42 16% 95%;
+        --card: 34 12% 10%;
+        --card-foreground: 42 16% 95%;
+        --popover: 34 12% 11%;
+        --popover-foreground: 42 16% 95%;
+        --primary: 39 48% 60%;
+        --primary-foreground: 34 14% 6%;
+        --secondary: 34 8% 15%;
+        --secondary-foreground: 42 16% 95%;
+        --muted: 34 8% 15%;
+        --muted-foreground: 42 10% 78%;
+        --accent: 39 48% 60%;
+        --accent-foreground: 34 14% 6%;
+        --destructive: 0 62.8% 46%;
+        --destructive-foreground: 42 16% 95%;
+        --border: 42 8% 24%;
+        --input: 34 8% 16%;
+        --ring: 39 48% 60%;
+        --radius: 0;
+    }
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+/* Hairline animation on links */
+.link-hairline {
+    position: relative;
+    display: inline-block;
+}
+.link-hairline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 1px;
+    background: #C5A059;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+.link-hairline:hover::after {
+    transform: scaleX(1);
+}
+
+/* Fade-up animation */
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.animate-fade-up {
+    animation: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.animate-fade-up-delay-1 { animation-delay: 0.1s; }
+.animate-fade-up-delay-2 { animation-delay: 0.25s; }
+.animate-fade-up-delay-3 { animation-delay: 0.4s; }
+.animate-fade-up-delay-4 { animation-delay: 0.55s; }
+
+/* Marquee */
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+.animate-marquee {
+    animation: marquee 40s linear infinite;
+}
+
+/* Ken burns for hero */
+@keyframes ken-burns {
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
+}
+.animate-ken-burns {
+    animation: ken-burns 18s ease-out both;
+}
+
+/* Card image zoom on hover */
+.card-image-wrap {
+    overflow: hidden;
+}
+.card-image-wrap img {
+    transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-image-wrap:hover img {
+    transform: scale(1.06);
+}
+
+/* Scrollbar-hide utility for horizontal scrollers */
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+[data-debug-wrapper="true"] {
+    display: contents !important;
+}
+
+/* Legibility helpers for text over imagery */
+.hero-text-shadow {
+    text-shadow: 0 2px 28px rgba(0, 0, 0, 0.6), 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+.on-image-shadow {
+    text-shadow: 0 1px 16px rgba(0, 0, 0, 0.7);
+}
+
+/* Product-led editorial home: full images, unframed and responsive. */
+.product-hero { background: #100f0d; }
+.hero-stage { min-height: 450px; }
+.hero-product-image { position: absolute; inset: 0 0 0 auto; width: 64%; height: 100%; object-fit: contain; }
+.hero-product-shade { background: linear-gradient(90deg, #100f0d 18%, rgba(16,15,13,.92) 30%, transparent 55%); }
+.hero-product-copy { width: 42%; min-height: 450px; padding: 44px 0 36px; display: flex; flex-direction: column; justify-content: center; }
+.product-carousel-track { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 48px) / 3); gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; }
+#about, #christmas-collection { scroll-margin-top: 180px; }
+:focus-visible { outline: 2px solid #C5A059; outline-offset: 4px; }
+@media (max-width: 1023px) {
+    .hero-product-image { width: 60%; }
+    .hero-product-copy { width: 48%; }
+    .product-carousel-track { grid-auto-columns: calc((100% - 24px) / 2); }
+    #about, #christmas-collection { scroll-margin-top: 120px; }
+}
+@media (max-width: 639px) {
+    .hero-product-image { width: 100%; height: 190px; inset: 0 0 auto; }
+    .hero-product-shade { background: linear-gradient(0deg, #100f0d 5%, transparent 80%); top: 150px; bottom: auto; height: 50px; }
+    .hero-product-copy { width: 100%; min-height: 0; padding: 210px 0 26px; }
+    .hero-product-copy h1 { font-size: 30px; }
+    .product-carousel-track { grid-auto-columns: 78%; gap: 16px; }
+    #about, #christmas-collection { scroll-margin-top: 150px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .animate-marquee, .animate-ken-burns, .animate-fade-up { animation: none; }
+    .card-image-wrap img { transition: none; }
+}

@@ -1,0 +1,63 @@
+const categoryKeys = ["blended-spices", "single-spices", "whole-spices", "bedsheets", "cushion-covers", "pillow-covers", "table-runners", "wall-hangings", "dining-sheets", "necklaces", "earrings", "bangles", "rings", "ornaments", "stockings", "table-linen", "tree-toppers"];
+const copy = {
+    en: {
+        christmas: "Christmas Theme",
+        categories: ["Blended Spices", "Single Spices", "Whole Spices", "Bedsheets", "Cushion Covers", "Pillow Covers", "Table Runners", "Wall Hangings", "Dining Sheets", "Necklaces", "Earrings", "Bangles", "Rings", "Ornaments", "Stockings", "Table Linen", "Tree Toppers"],
+        "catalog.categories": "Categories", "catalog.products": "products", "catalog.error": "We couldn't load the collection. Please try again.", "catalog.retry": "Try again",
+        "carousel.previous": "Previous products", "carousel.next": "Next products", "hero.previous": "Previous product", "hero.next": "Next product",
+        "hero.selection": "The Keneth selection", "hero.viewProduct": "Discover this piece", "hero.choose": "View",
+        "sec.featured.sub": "The jewel edit — a little everyday splendour.", "featured.title": "Made to be remembered.", "featured.eyebrow": "The Jewel House", "featured.cta": "Explore the jewel collection",
+        "video.unavailable": "This film is currently unavailable.", "video.open": "Open video", "video.title": "The Keneth Global story",
+        "video.unsupported": "This video format could not be played in this browser.",
+        "announcement.delivery": "Complimentary EU delivery over €120", "announcement.spices": "Sealed within hours of milling", "announcement.craft": "Handcrafted in six Indian states",
+    },
+    de: {
+        christmas: "Weihnachtswelt",
+        categories: ["Gewürzmischungen", "Einzelgewürze", "Ganze Gewürze", "Bettlaken", "Kissenbezüge", "Kopfkissenbezüge", "Tischläufer", "Wandbehänge", "Tischdecken", "Halsketten", "Ohrringe", "Armreifen", "Ringe", "Baumschmuck", "Weihnachtsstrümpfe", "Tischwäsche", "Baumspitzen"],
+        "catalog.categories": "Kategorien", "catalog.products": "Produkte", "catalog.error": "Die Kollektion konnte nicht geladen werden.", "catalog.retry": "Erneut versuchen",
+        "carousel.previous": "Vorherige Produkte", "carousel.next": "Weitere Produkte", "hero.previous": "Vorheriges Produkt", "hero.next": "Nächstes Produkt",
+        "hero.selection": "Die Keneth Auswahl", "hero.viewProduct": "Dieses Stück entdecken", "hero.choose": "Ansehen",
+        "sec.featured.sub": "Unsere Schmuckauswahl — ein wenig Glanz für jeden Tag.", "featured.title": "Unvergessliche Stücke.", "featured.eyebrow": "Das Schmuckhaus", "featured.cta": "Schmuckkollektion entdecken",
+        "video.unavailable": "Dieser Film ist derzeit nicht verfügbar.", "video.open": "Video öffnen", "video.title": "Die Geschichte von Keneth Global",
+        "video.unsupported": "Dieses Videoformat konnte in diesem Browser nicht abgespielt werden.",
+        "announcement.delivery": "Kostenloser EU-Versand ab 120 €", "announcement.spices": "Innerhalb von Stunden nach dem Mahlen versiegelt", "announcement.craft": "Handgefertigt in sechs indischen Bundesstaaten",
+    },
+    fr: {
+        christmas: "Univers de Noël",
+        categories: ["Mélanges d’épices", "Épices simples", "Épices entières", "Draps", "Housses de coussin", "Taies d’oreiller", "Chemins de table", "Tentures murales", "Nappes", "Colliers", "Boucles d’oreilles", "Bracelets", "Bagues", "Ornements", "Chaussettes de Noël", "Linge de table", "Cimes de sapin"],
+        "catalog.categories": "Catégories", "catalog.products": "produits", "catalog.error": "Impossible de charger la collection.", "catalog.retry": "Réessayer",
+        "carousel.previous": "Produits précédents", "carousel.next": "Produits suivants", "hero.previous": "Produit précédent", "hero.next": "Produit suivant",
+        "hero.selection": "La sélection Keneth", "hero.viewProduct": "Découvrir cette pièce", "hero.choose": "Voir",
+        "sec.featured.sub": "La sélection bijoux — un peu d’éclat au quotidien.", "featured.title": "Des pièces inoubliables.", "featured.eyebrow": "La maison du bijou", "featured.cta": "Découvrir les bijoux",
+        "video.unavailable": "Ce film est actuellement indisponible.", "video.open": "Ouvrir la vidéo", "video.title": "L’histoire de Keneth Global",
+        "video.unsupported": "Ce format vidéo n’a pas pu être lu dans ce navigateur.",
+        "announcement.delivery": "Livraison offerte dans l’UE dès 120 €", "announcement.spices": "Scellées quelques heures après la mouture", "announcement.craft": "Fabriqué à la main dans six États indiens",
+    },
+    es: {
+        christmas: "Temática Navideña",
+        categories: ["Mezclas de especias", "Especias individuales", "Especias enteras", "Sábanas", "Fundas de cojín", "Fundas de almohada", "Caminos de mesa", "Tapices", "Manteles", "Collares", "Pendientes", "Brazaletes", "Anillos", "Adornos", "Calcetines navideños", "Ropa de mesa", "Puntas de árbol"],
+        "catalog.categories": "Categorías", "catalog.products": "productos", "catalog.error": "No se pudo cargar la colección.", "catalog.retry": "Reintentar",
+        "carousel.previous": "Productos anteriores", "carousel.next": "Productos siguientes", "hero.previous": "Producto anterior", "hero.next": "Producto siguiente",
+        "hero.selection": "La selección Keneth", "hero.viewProduct": "Descubrir esta pieza", "hero.choose": "Ver",
+        "sec.featured.sub": "La selección de joyas — un poco de brillo cada día.", "featured.title": "Piezas para recordar.", "featured.eyebrow": "La casa de las joyas", "featured.cta": "Explorar las joyas",
+        "video.unavailable": "Este vídeo no está disponible ahora.", "video.open": "Abrir vídeo", "video.title": "La historia de Keneth Global",
+        "video.unsupported": "Este formato de vídeo no se pudo reproducir en este navegador.",
+        "announcement.delivery": "Envío gratuito a la UE desde 120 €", "announcement.spices": "Selladas a las pocas horas de moler", "announcement.craft": "Hecho a mano en seis estados de India",
+    },
+    it: {
+        christmas: "Tema Natalizio",
+        categories: ["Miscele di spezie", "Spezie singole", "Spezie intere", "Lenzuola", "Fodere per cuscini", "Federe", "Runner da tavola", "Arazzi", "Tovaglie", "Collane", "Orecchini", "Bracciali", "Anelli", "Decorazioni", "Calze natalizie", "Biancheria da tavola", "Puntali"],
+        "catalog.categories": "Categorie", "catalog.products": "prodotti", "catalog.error": "Impossibile caricare la collezione.", "catalog.retry": "Riprova",
+        "carousel.previous": "Prodotti precedenti", "carousel.next": "Prodotti successivi", "hero.previous": "Prodotto precedente", "hero.next": "Prodotto successivo",
+        "hero.selection": "La selezione Keneth", "hero.viewProduct": "Scopri questo pezzo", "hero.choose": "Vedi",
+        "sec.featured.sub": "La selezione gioielli — un tocco di splendore ogni giorno.", "featured.title": "Pezzi indimenticabili.", "featured.eyebrow": "La casa del gioiello", "featured.cta": "Esplora i gioielli",
+        "video.unavailable": "Questo film non è disponibile al momento.", "video.open": "Apri video", "video.title": "La storia di Keneth Global",
+        "video.unsupported": "Questo formato video non può essere riprodotto in questo browser.",
+        "announcement.delivery": "Spedizione gratuita nell’UE oltre 120 €", "announcement.spices": "Sigillate entro poche ore dalla macinazione", "announcement.craft": "Fatto a mano in sei stati indiani",
+    },
+};
+
+export const STOREFRONT_TRANSLATIONS = Object.fromEntries(Object.entries(copy).map(([lang, { christmas, categories, ...text }]) => [lang, {
+    ...text, "nav.christmas": christmas, "vert.christmas.title": christmas, "shop.filter.christmas": christmas,
+    ...Object.fromEntries(categoryKeys.map((key, index) => [`category.${key}`, categories[index]])),
+}]));
