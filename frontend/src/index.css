@@ -8,6 +8,7 @@ html,
 body {
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
     background: #14120E;
     color: #F2F0EA;
     font-family: "Outfit", sans-serif;

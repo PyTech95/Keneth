@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { api, STATIC_BASE } from "@/lib/api";
 import { X, Play, ChevronLeft, ChevronRight } from "lucide-react";
 
-const mediaUrl = (src) => `${STATIC_BASE}/${src.replace(/^gallery\//, "gallery/")}`;
+const mediaUrl = (src) => `${STATIC_BASE}/${src}`;
 
 export default function Gallery() {
     const [items, setItems] = useState([]);

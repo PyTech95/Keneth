@@ -234,3 +234,9 @@ A modern e-commerce website for Keneth Global — an Indian company exporting to
 - Added 5 more distinct items: Etched Silver Beaded Napkin Ring, Kundan & Ruby Drop Choker Set, CZ Solitaire Bridal Necklace Set, Multicolour Gemstone Long Chand Earrings, Crescent Kundan & Pearl Hoop Earrings.
 - Total catalog is now 119 products across 4 houses (Masalas: 16, Home Furnishing: 42, Christmas Theme: 39, Artificial Jewelry: 22).
 - Verified: all 119 products have 100% working 200 HTTP images and active listings.
+
+## Gallery feature + responsive pass (2026-10-05)
+- Added brand GALLERY: owner-uploaded behind-the-scenes photos (27 images) + 1 film, processed into backend/static/gallery (images downsized to 1600px JPEG, film.mp4 copied).
+- Backend: GET /api/gallery scans static/gallery and returns 28 items ([{type:image|video, src}]); media served via existing /api/static mount.
+- Frontend: new /gallery page (pages/Gallery.js) — hero, click-to-play video, masonry image grid with keyboard-navigable lightbox. Links added in header desktop nav (nav-gallery) + mobile menu (mobile-nav-gallery), footer (footer-gallery-link), and a homepage teaser section (components/GalleryTeaser.js, home-gallery-section). Product pages unchanged.
+- Responsive: testing agent audited Home, Shop, Product, Cart, Gallery at 390px (mobile) and 768px (tablet) — 0 horizontal overflow, no broken layouts. Backend+frontend tests 100% (iteration_8.json). Added defensive `overflow-x: hidden` on body.
