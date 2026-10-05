@@ -142,16 +142,25 @@ async def list_products(vertical: Optional[str] = None, category: Optional[str] 
 @api.get("/gallery")
 async def gallery():
     """List brand gallery media (images + video) served from static/gallery."""
+    from gallery_captions import CAPTIONS
     items = []
     if GALLERY_DIR.exists():
         for f in sorted(GALLERY_DIR.iterdir()):
             if f.name.startswith("."):
                 continue
             ext = f.suffix.lower()
+            meta = CAPTIONS.get(f.stem, {})
+            entry = {
+                "src": f"gallery/{f.name}",
+                "caption": meta.get("caption", ""),
+                "location": meta.get("location", ""),
+            }
             if ext in (".jpg", ".jpeg", ".png", ".webp"):
-                items.append({"type": "image", "src": f"gallery/{f.name}"})
+                entry["type"] = "image"
+                items.append(entry)
             elif ext in (".mp4", ".webm", ".mov"):
-                items.append({"type": "video", "src": f"gallery/{f.name}"})
+                entry["type"] = "video"
+                items.append(entry)
     return items
 
 

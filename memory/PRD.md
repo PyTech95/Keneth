@@ -240,3 +240,5 @@ A modern e-commerce website for Keneth Global — an Indian company exporting to
 - Backend: GET /api/gallery scans static/gallery and returns 28 items ([{type:image|video, src}]); media served via existing /api/static mount.
 - Frontend: new /gallery page (pages/Gallery.js) — hero, click-to-play video, masonry image grid with keyboard-navigable lightbox. Links added in header desktop nav (nav-gallery) + mobile menu (mobile-nav-gallery), footer (footer-gallery-link), and a homepage teaser section (components/GalleryTeaser.js, home-gallery-section). Product pages unchanged.
 - Responsive: testing agent audited Home, Shop, Product, Cart, Gallery at 390px (mobile) and 768px (tablet) — 0 horizontal overflow, no broken layouts. Backend+frontend tests 100% (iteration_8.json). Added defensive `overflow-x: hidden` on body.
+
+- Gallery captions: each photo now carries a short caption + location (backend/gallery_captions.py -> /api/gallery), shown under every grid image (data-testid gallery-caption-N) and in the lightbox.

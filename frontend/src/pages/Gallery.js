@@ -97,20 +97,30 @@ export default function Gallery() {
                     {error && <p data-testid="gallery-error" className="text-sm text-bone-300">Could not load the gallery. Please try again later.</p>}
                     <div className="columns-2 md:columns-3 lg:columns-4 gap-3 sm:gap-4 [column-fill:_balance]">
                         {images.map((img, i) => (
-                            <button
-                                type="button"
+                            <figure
                                 key={img.src}
-                                data-testid={`gallery-item-${i}`}
-                                onClick={() => setLightbox(i)}
-                                className="group mb-3 sm:mb-4 block w-full overflow-hidden bg-ink-800 break-inside-avoid"
+                                className="mb-3 sm:mb-4 break-inside-avoid"
                             >
-                                <img
-                                    src={mediaUrl(img.src)}
-                                    alt={`Keneth gallery ${i + 1}`}
-                                    loading="lazy"
-                                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-                                />
-                            </button>
+                                <button
+                                    type="button"
+                                    data-testid={`gallery-item-${i}`}
+                                    onClick={() => setLightbox(i)}
+                                    className="group block w-full overflow-hidden bg-ink-800"
+                                >
+                                    <img
+                                        src={mediaUrl(img.src)}
+                                        alt={img.caption || `Keneth gallery ${i + 1}`}
+                                        loading="lazy"
+                                        className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+                                    />
+                                </button>
+                                {(img.caption || img.location) && (
+                                    <figcaption data-testid={`gallery-caption-${i}`} className="pt-2 pb-1">
+                                        {img.caption && <span className="block text-sm text-bone-100 leading-snug">{img.caption}</span>}
+                                        {img.location && <span className="block text-[10px] uppercase tracking-[0.18em] text-brass-300 mt-0.5">{img.location}</span>}
+                                    </figcaption>
+                                )}
+                            </figure>
                         ))}
                     </div>
                 </div>
@@ -131,14 +141,18 @@ export default function Gallery() {
                     </button>
                     <img
                         src={mediaUrl(images[lightbox].src)}
-                        alt={`Keneth gallery ${lightbox + 1}`}
+                        alt={images[lightbox].caption || `Keneth gallery ${lightbox + 1}`}
                         className="max-h-[85vh] max-w-[90vw] object-contain"
                         onClick={(e) => e.stopPropagation()}
                     />
                     <button type="button" onClick={(e) => { e.stopPropagation(); next(); }} className="absolute right-2 sm:right-6 p-2 text-bone-100 hover:text-brass-400 transition-colors" aria-label="Next">
                         <ChevronRight className="w-8 h-8" />
                     </button>
-                    <span className="absolute bottom-5 left-1/2 -translate-x-1/2 text-xs uppercase tracking-[0.3em] text-bone-300">{lightbox + 1} / {images.length}</span>
+                    <div className="absolute bottom-5 left-0 right-0 px-6 text-center pointer-events-none">
+                        {images[lightbox].caption && <p data-testid="gallery-lightbox-caption" className="font-serif text-lg sm:text-xl text-bone-100">{images[lightbox].caption}</p>}
+                        {images[lightbox].location && <p className="text-[10px] uppercase tracking-[0.22em] text-brass-300 mt-1">{images[lightbox].location}</p>}
+                        <p className="text-[10px] uppercase tracking-[0.3em] text-bone-300/70 mt-2">{lightbox + 1} / {images.length}</p>
+                    </div>
                 </div>
             )}
         </div>
