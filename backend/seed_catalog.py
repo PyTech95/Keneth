@@ -952,3 +952,11 @@ CATALOG = [
 
 
 ]
+
+# Merge in individual products imported from owner-uploaded photos, and drop the
+# old grouped listings they replace so nothing duplicates.
+from uploaded_catalog import UPLOADED, REMOVED_SLUGS  # noqa: E402
+
+CATALOG = [p for p in CATALOG if p["slug"] not in REMOVED_SLUGS] + [
+    {k: v for k, v in p.items() if not k.startswith("_")} for p in UPLOADED
+]

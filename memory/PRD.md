@@ -220,3 +220,11 @@ A modern e-commerce website for Keneth Global — an Indian company exporting to
 - Deferred earlier requests: split jewellery folder into individual listings; add gold/green tree-skirt colour variants.
 - Product images are self-hosted (/api/static); decorative hero/editorial images still use external stock URLs — can localize on request to remove all external image dependency.
 - Deploy to production pending user 'confirm deploy' (lets them retire their VPS).
+
+## Uploaded products added (2026-10-05)
+- Imported owner-uploaded product photos (8 folders) as individual catalog products. Per owner: every distinct design = its own product; old grouped listings removed so nothing duplicates.
+- New module `backend/uploaded_catalog.py` holds 81 individual products (UPLOADED) + REMOVED_SLUGS (11 old grouped listings). `seed_catalog.py` filters removed slugs and merges UPLOADED into CATALOG. `server.py` startup deletes REMOVED_SLUGS from DB after seeding.
+- `backend/generate_uploaded_images.py` converts source photos (backend/uploaded_src/) to slug-named PNGs in static/products/ (98 PNGs); reconcile_static_images attaches them on startup.
+- Catalog now 114 products: masalas 16, home-furnishing 41 (incl 28 napkin-rings, 2 curtain-holdbacks, 3 candle-holders, 3 wall-hangings), christmas-decor 39 (18 ornaments, 8 stockings, 7 coasters, 4 tree-skirts), artificial-jewelry 18 (8 necklaces, 4 earrings, 3 leather-accessories, 2 bangles, 1 ring).
+- Personal/people photos and phone-screenshot grids were excluded as non-products.
+- Prices set as sensible EUR defaults in line with similar items (owner can edit in Admin). Verified: all 114 products return a 200 image; new product detail pages render real photos.

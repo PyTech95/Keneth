@@ -29,6 +29,7 @@ from auth_utils import (
     _sanitize_user,
 )
 from seed_catalog import CATALOG
+from uploaded_catalog import REMOVED_SLUGS
 from static_catalog import reconcile_static_images
 from extra_routes import extra_router, seed_journal
 from video_settings import video_router
@@ -120,7 +121,7 @@ async def me(user=Depends(get_current_user)):
 
 # ================== PRODUCTS ==================
 @api.get("/products")
-async def list_products(vertical: Optional[str] = None, category: Optional[str] = None, q: Optional[str] = None, limit: int = 100):
+async def list_products(vertical: Optional[str] = None, category: Optional[str] = None, q: Optional[str] = None, limit: int = 500):
     query = {"active": {"$ne": False}}
     if vertical:
         query["vertical"] = vertical
@@ -428,6 +429,9 @@ async def on_startup():
     # seed
     await seed_admin(db)
     await seed_catalog(db)
+    # Drop old grouped listings now replaced by individual uploaded products.
+    if REMOVED_SLUGS:
+        await db.products.delete_many({"slug": {"$in": REMOVED_SLUGS}})
     await seed_journal(db)
     # Restore bundled photo paths on a fresh database; no generation or network calls.
     await reconcile_static_images(db)
